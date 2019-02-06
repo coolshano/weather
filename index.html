@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <title>~ Weather In Ragama ~</title>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+        <style>
+        li {
+                text-align: center;
+        }  
+        h4 {
+                text-align: center;
+        }       
+        </style>
+              </head>
+
+<body>
+
+        <div class="container">
+                <div class="jumbotron">
+                        <h4>Weather In Ragama</h4>
+                </div>
+                
+              </div>
+              <div class="container">
+                        <ul class="list-group">
+                          <li class="list-group-item"><h4>Temp: <span id="main"></span></h4></li>
+                          <li class="list-group-item"><h4>Country: <span id="sys"></span></h4></li>
+                          <li class="list-group-item"><h4>Londitude: <span id="coord"></span></h4></li>
+                          <li class="list-group-item"><h4>City: <span id="city"></span></h4></li>
+                          <li class="list-group-item"><h4>Latitude: <span id="coord2"></span></h4></li>
+                        </ul>
+                      </div>
+
+<script>
+
+
+var req = new XMLHttpRequest();
+var url = "http://api.openweathermap.org/data/2.5/weather?q=";
+var city = "Ragama";
+var unit = "&units=metric&APPID=";
+var api_key = "20052cedd7a1e365255b27471a83b045";
+
+req.open("GET", url + city + unit + api_key);
+req.send();
+
+req.addEventListener("load", function(){
+	if(req.status == 200 && req.readyState == 4){
+  	var response = JSON.parse(req.responseText);
+    document.getElementById("main").textContent = response.main.temp;
+    document.getElementById("sys").textContent = response.sys.country;
+    document.getElementById("city").textContent = response.name;
+    document.getElementById("coord").textContent = response.coord.lon;
+    document.getElementById("coord2").textContent = response.coord.lat;
+  }
+})
+
+</script>
+</body>
+</html>
